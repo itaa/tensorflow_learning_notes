@@ -49,10 +49,10 @@ def add_layer(inputs, in_size, out_size, activation_function=None):
 # x_data 从-1到1的区间有300个单位
 # [:, np.newaxis] 加上一个维度，有300行，有300个例子
 x_data = np.linspace(-1, 1, 300)[:, np.newaxis]
-# noise
+# noise is a [0, 0.05]之间的一个随机数
 # 加上一个noise使得更像真实的数据
 noise = np.random.normal(0, 0.05, x_data.shape)
-# y_data = x_data^2 -0.5
+# y_data = x_data^2 -0.5 + noise
 y_data = np.square(x_data) - 0.5 + noise
 
 # define xs ys
