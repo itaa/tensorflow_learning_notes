@@ -1,29 +1,7 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
-
-# Linear Nonlinear
-# 线性 非线性
-# y = Wx 线性函数
-# y = AF(Wx) 激励函数
-# AF()
-# relu sigmoid tanh
-# 可以创造自己的激励函数，但是要求激励函数必须是可以微分的
-# 因为在误差反向传播的时候，只有可以微分的函数才能够将误差传递回去
-# 切记在多层网络的时候不能随便选择激励函数， 因为如果选择不对会造成梯度爆炸和梯度消失的问题
-
-# CNN（Convolutional Neural Network）
-# 卷积神经网络推荐使用 relu
-# RNN (Recurrent Neural Network)
-# 循环神经网络推荐使用 relu or tanh
-
-# 激励函数 activation function 应该放在layer将要输出的时候
-
-# https://www.tensorflow.org/versions/r0.10/api_docs/python/nn/activation_functions_
-
-# relu: 当x<0时候，y=0, 当x>0 时候 y = Wx + b
-# softplus 用作分类器
-# 每一个activation function 都有自己的适用之处
 
 # 添加神经层
 def add_layer(inputs, in_size, out_size, activation_function=None):
@@ -88,14 +66,37 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
-
+# 生成一个图片框
+fig = plt.figure()
+# 1, 1, 1 表示一行一列 第一个
+ax = fig.add_subplot(1, 1, 1)
+ax.scatter(x_data, y_data)
+# show 的时候把程序暂停看了
+# 新版可以使用plt.ion()的方式来继续划线
+# 旧版本中 使用plt.show(block=False)
+plt.ion()
+plt.show()
+#
 for i in range(1000):
     # train_step 训练
     # 其中的feed_dict is input data
     sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
     if i % 50 is 0:
         # run loss, 只要是使用了placeholder的地方都要使用feed_dict传入
-        print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
+        # print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
+
+        try:
+            # remove line
+            ax.lines.remove(lines[0])
+        except Exception:
+            pass
+
+        prediction_value = sess.run(prediction, feed_dict={xs: x_data, ys: y_data})
+        # x, y, 红线, 线宽=5
+        lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
+
+        # 暂停0.1秒
+        plt.pause(0.1)
 
 
 
