@@ -22,6 +22,9 @@ import tensorflow as tf
 # W += -Learning rate * dx / √V (v的开方) --->  AdaGrad
 # 实验表明，大多数时候使用Adam都能又快又好的达到目标
 
+# AlphaGo 使用的是 RMSPropOptimizer
+# 机器学习也就是从一个cost比较大的地方走到一个cost最小的地方
 
+# 初学者的使用GradientDescent基本上级就可以了
 
 
