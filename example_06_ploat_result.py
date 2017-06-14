@@ -77,7 +77,7 @@ ax.scatter(x_data, y_data)
 plt.ion()
 plt.show()
 #
-for i in range(1000):
+for i in range(2000):
     # train_step 训练
     # 其中的feed_dict is input data
     sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
