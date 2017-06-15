@@ -11,6 +11,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 # number 1 to 10 image data
 # 如果本地没有相应的数据包，会先下载，然后解压数据包
+# MNIST_data 是下载数据要保存的位置
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 # 添加神经层

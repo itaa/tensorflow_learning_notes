@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 
 # tensorboard 的使用
-
 # 添加神经层
 def add_layer(inputs, in_size, out_size, layer_name, activation_function=None):
     # Weights define
@@ -33,8 +32,6 @@ def add_layer(inputs, in_size, out_size, layer_name, activation_function=None):
             # histogram 直方图；柱状图 总结biases
             tf.summary.histogram(layer_name + '/outputs', outputs)
         return outputs
-
-
 
 
 # x_data 从-1到1的区间有300个单位
