@@ -72,15 +72,34 @@ def conv2d(x, W):
 
 
 def max_pool_2x2(x):
-    pass
+    result = tf.nn.max_pool(x,
+                            ksize=[1, 2, 2, 1],
+                            strides=[1, 2, 2, 1],
+                            padding='SAME')
+    return result
 
 
 keep_prob = tf.placeholder(tf.float32)
 xs = tf.placeholder(tf.float32, [None, 784])
 ys = tf.placeholder(tf.float32, [None, 10])
 
-## conv1 layer
+# 将输入的xs转换为图片的形式
+# -1 不管维度
+# 28*28 像素点
+# 1 channel 是黑白
+x_image = tf.reshape(xs, [-1, 28, 28, 1])
+# print(x_image.shape) # [n_samples, 28, 28, 1]
 
+
+## conv1 layer
+# 5 * 5 patch ，长*宽
+# in size is 1， image的厚度，输入的厚度
+# out is 32， 输出的深度，厚度
+W_conv1 = weight_variable([5, 5, 1, 32])
+# 32个输出，所有b为32
+b_conv1= bias_variable([32])
+h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
+h_pool1 = max_pool_2x2(h_conv1)
 ## conv2 layer
 
 ## func1 layer
